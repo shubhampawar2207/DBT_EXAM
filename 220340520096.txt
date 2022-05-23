@@ -1,0 +1,91 @@
+drop table dept;
+use happy;
+create table dept(deptno int (2),dname varchar(15), loc varchar(10));
+desc dept;
+
+insert into dept  values(10,'accounting','new york'),(20,'research', 'dallas'),(30,'sales','chicago'),(40,'operations','boston');
+
+
+select *from dept;
+drop table emp;
+create table emp(empno int (4),ename varchar(10), job varchar(9),hiredate date,sal  float(7,2),comm float(7,2),deptno int(2));
+
+desc emp;
+
+
+insert into emp values
+(7499,	'ALLEN','SALESMAN','1981-02-20',1600,300,30) ;
+select *from emp;
+
+select *from emp sal where sal between 2500 and 5000;
+select *from emp order by ename desc;
+select  lower(job) as JOBS from emp;
+select ename ,   length (ename)from emp;
+
+select *From emp;
+select deptno ,count(deptno) from emp ;
+select *from dept;
+
+select dept.dname,emp.ename from dept,emp where dept.deptno=emp.deptno;
+select *from emp;
+select *from dept;
+
+
+select *from emp where ename like  '%a%r';
+
+select *from emp where job like  '%a%r';
+
+
+
+
+
+select (sal + sal *20/100) as "HRA" from emp;
+
+delimiter //
+create function FUNC1(a int ,b int,c int)
+returns boolean 
+deterministic 
+begin
+if not (a+b>=c and b+c>=c and c+a>=b) then return false;
+else return true;
+end if;
+end ;//
+delimiter ;
+
+
+select FUNC1(12,2,5);
+	
+
+
+delimiter //
+create procedure PROC1 (string1 varchar(20),  varchar(20))
+
+create table shubham (a varchar(20),b varchar (50));
+
+delimiter //
+use happy;
+create procedure PROC1(string1 varchar(20),string2 varchar(20))
+begin
+     declare x int;
+     set x = (instr(string2,string1));
+     if x=0 then 
+             insert into shubham values(x,'string1 doesnt exists inside string2');
+     else         
+		     insert into shubham values(x,'string exist inside str2');
+     end if;        
+end; // 
+delimiter //	 
+
+call PROC1('DAC','CDAC');
+
+select *from shubham;
+select  procedure  PROC1("DAC","DAC");
+
+drop procedure PROC1;
+
+
+
+
+
+
+
